@@ -4,6 +4,7 @@ import cursoSpring.api.endereco.Endereco;
 import cursoSpring.api.medico.DadosCadastroMedico;
 import cursoSpring.api.medico.MedicoRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.reactive.TransactionalOperator;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +19,10 @@ public class MedicoController {
 
     @Autowired
     private MedicoRepository repository;
-    @Autowired
-    private TransactionalOperator transactionalOperator;
 
     @PostMapping
     @Transactional
-    public void Cadastrar(@RequestBody DadosCadastroMedico dados) {
+    public void Cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
         repository.save(new Medico(dados));
 
     }
